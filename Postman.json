@@ -1,0 +1,276 @@
+{
+	"info": {
+		"_postman_id": "14dc0b2d-ba9e-4f9d-8a4b-efd77a1dcf72",
+		"name": "Personal Finance Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41302892",
+		"_collection_link": "https://backend-8981.postman.co/workspace/backend-Workspace~545f12fe-146f-41c3-af5a-d74de7ea7f87/collection/41302892-14dc0b2d-ba9e-4f9d-8a4b-efd77a1dcf72?action=share&source=collection_link&creator=41302892"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"karthickadd@gmail.com\",\r\n    \"password\":\"admin@123\",\r\n    \"full_name\":\"karthick\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"karthickadd@gmail.com\",\r\n    \"password\":\"admin@123\",\r\n    \"full_name\":\"karthick\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "profile",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "add transactions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6ImthcnRoaWNrIiwiZW1haWwiOiJrYXJ0aGlja2FkZEBnbWFpbC5jb20iLCJpYXQiOjE3NTcxNDI5NDB9.cUeRHiRHrjOTpCIrBaDp6ptflf-zcpDX4en-FFRyVvc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"amount\": 50.00,\r\n  \"type\": \"expense\",\r\n  \"category\": \"food\",\r\n  \"description\": \"Lunch at restaurant\",\r\n  \"transaction_date\": \"2025-09-05\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all transactions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6ImthcnRoaWNrIiwiZW1haWwiOiJrYXJ0aGlja2FkZEBnbWFpbC5jb20iLCJpYXQiOjE3NTcxNDI5NDB9.cUeRHiRHrjOTpCIrBaDp6ptflf-zcpDX4en-FFRyVvc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get single transactions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6ImthcnRoaWNrIiwiZW1haWwiOiJrYXJ0aGlja2FkZEBnbWFpbC5jb20iLCJpYXQiOjE3NTcxNDI5NDB9.cUeRHiRHrjOTpCIrBaDp6ptflf-zcpDX4en-FFRyVvc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/transactions/7",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transactions",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update single transactions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6ImthcnRoaWNrIiwiZW1haWwiOiJrYXJ0aGlja2FkZEBnbWFpbC5jb20iLCJpYXQiOjE3NTcxNDI5NDB9.cUeRHiRHrjOTpCIrBaDp6ptflf-zcpDX4en-FFRyVvc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/transactions/7",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transactions",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete single transactions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6ImthcnRoaWNrIiwiZW1haWwiOiJrYXJ0aGlja2FkZEBnbWFpbC5jb20iLCJpYXQiOjE3NTcxNDI5NDB9.cUeRHiRHrjOTpCIrBaDp6ptflf-zcpDX4en-FFRyVvc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/transactions/6",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transactions",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all summary",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6ImthcnRoaWNrIiwiZW1haWwiOiJrYXJ0aGlja2FkZEBnbWFpbC5jb20iLCJpYXQiOjE3NTcxNDI5NDB9.cUeRHiRHrjOTpCIrBaDp6ptflf-zcpDX4en-FFRyVvc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/transactions/summary",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"transactions",
+						"summary"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
