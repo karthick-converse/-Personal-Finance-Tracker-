@@ -1,19 +1,11 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { loginUserDto } from './dto/login-user.dto';
-import { TokenGuard } from '../guard/user.guard';
-import { tokendecode } from '../decorator/user.decorator';
+
+import { tokendecode } from '../decorator/token-decode.decorator';
 import { token_user } from '../interface/token.interface';
+import { TokenGuard } from 'src/guard/token.guard';
 
 @Controller('auth')
 export class UserController {

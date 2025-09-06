@@ -1,9 +1,9 @@
 import {
   Column,
   Entity,
-  OneToMany,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
-  Timestamp,
 } from 'typeorm';
 import { User } from './user.entity';
 
@@ -14,10 +14,11 @@ export enum type {
 
 @Entity('Transaction')
 export class Transaction {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToMany(() => User, (user) => user.id)
+  @ManyToOne((type) => User, (user) => user.id)
+  @JoinColumn({ name: 'user_id' })
   user_id: User;
 
   @Column({
@@ -35,6 +36,7 @@ export class Transaction {
 
   @Column({
     type: 'text',
+    nullable: true,
   })
   description?: string;
 
@@ -45,6 +47,7 @@ export class Transaction {
 
   @Column({
     type: 'timestamp',
+    default: new Date(),
   })
   created_at: Date;
 }

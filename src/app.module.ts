@@ -3,7 +3,10 @@ import { UserModule } from './user/user.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './database/entities/user.entity';
-// import { Transaction } from './database/entities/transaction.entity';
+import { Transaction } from './database/entities/transaction.entity';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 @Module({
   imports: [
@@ -11,12 +14,12 @@ import { User } from './database/entities/user.entity';
     TransactionsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
+      host: process.env.host,
+      port: Number(process.env.port),
       username: 'postgres',
-      password: 'pgadmin',
-      entities: [User],
-      database: 'dynamic_form',
+      password: process.env.password,
+      entities: [User, Transaction],
+      database: process.env.database,
       synchronize: true,
     }),
   ],

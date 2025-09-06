@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   HttpStatus,
   Injectable,
@@ -18,7 +19,6 @@ export class UserService {
     @InjectRepository(User)
     private readonly userrepository: Repository<User>,
   ) {}
-
   async create(createUserDto: CreateUserDto) {
     try {
       const check_user = await this.userrepository.findOne({
@@ -29,6 +29,7 @@ export class UserService {
       if (check_user) {
         throw new ConflictException({
           success: false,
+          statuscode: HttpStatus.CONFLICT,
           message: 'User email already exits ',
         });
       }
@@ -36,7 +37,8 @@ export class UserService {
       const data = await this.userrepository.create(createUserDto);
       await this.userrepository.save(data);
       return {
-        success: HttpStatus.OK,
+        success: true,
+        statuscode: HttpStatus.CREATED,
         message: `${data.full_name} Createed success fully`,
       };
     } catch (e) {
@@ -60,6 +62,7 @@ export class UserService {
       if (!check_user) {
         throw new NotFoundException({
           success: false,
+          statuscode: HttpStatus.NOT_FOUND,
           message: 'user not found',
         });
       }
@@ -70,15 +73,19 @@ export class UserService {
       );
 
       if (!password_verify) {
-        throw {
+        throw new BadRequestException({
           success: false,
+          statuscode: HttpStatus.BAD_REQUEST,
           message: 'user email or password wrong',
-        };
+        });
       }
-      const token = jwt.sign(payload, 'karthick');
+      const token_secret = process.env.token_secret || 'iambackendeveloper';
+
+      const token = jwt.sign(payload, token_secret);
 
       return {
         success: true,
+        statuscode: HttpStatus.OK,
         message: 'login successful',
         token,
       };
@@ -96,12 +103,14 @@ export class UserService {
       if (!find_user) {
         throw new NotFoundException({
           success: false,
+          statuscode: HttpStatus.NOT_FOUND,
           message: 'user not found',
         });
       }
 
       return {
         success: true,
+        statuscode: HttpStatus.OK,
         message: 'user fetch successfully',
         data: find_user,
       };
