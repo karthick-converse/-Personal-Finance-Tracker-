@@ -1,45 +1,50 @@
-// import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Timestamp } from "typeorm";
-// import { User } from "./user.entity";
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  Timestamp,
+} from 'typeorm';
+import { User } from './user.entity';
 
+export enum type {
+  INCOME = 'income',
+  EXPENSE = 'expense',
+}
 
+@Entity('Transaction')
+export class Transaction {
+  @PrimaryGeneratedColumn()
+  id: string;
 
-// export enum type{
-//   INCOME='income',
-//   EXPENSE='expense'
-// }
+  @OneToMany(() => User, (user) => user.id)
+  user_id: User;
 
-// @Entity('Transaction')
-// export class Transaction {
- 
-//  @PrimaryGeneratedColumn()
-//  id:string;
+  @Column({
+    type: 'decimal',
+  })
+  amount: number;
 
-//  @Column({
-//     type:"decimal"
-//  })
-//  amount:number
+  @Column({
+    enum: type,
+  })
+  type: type.INCOME;
 
-//  @Column({
-//     enum:type
-//  })
-//  type:type.INCOME
+  @Column()
+  category: string;
 
-//  @Column()
-//  category:string
+  @Column({
+    type: 'text',
+  })
+  description?: string;
 
-//  @Column({
-//     type:'text'
-//  })
-//  description?:string
+  @Column({
+    type: 'timestamp',
+  })
+  transaction_date: Date;
 
-//  @Column({
-//     default:Date
-//  })
-// transaction_date:Timestamp 
-
-// @Column()
-// created_at:Timestamp
-
-// }
-
-
+  @Column({
+    type: 'timestamp',
+  })
+  created_at: Date;
+}

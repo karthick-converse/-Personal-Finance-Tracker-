@@ -1,7 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { loginUserDto } from './dto/login-user.dto';
+import { TokenGuard } from '../guard/user.guard';
+import { tokendecode } from '../decorator/user.decorator';
+import { token_user } from '../interface/token.interface';
 
 @Controller('auth')
 export class UserController {
@@ -11,14 +23,16 @@ export class UserController {
   register(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
+
   @Post('/login')
-  login(@Body() createUserDto: CreateUserDto) {
+  login(@Body() createUserDto: loginUserDto) {
     return this.userService.login(createUserDto);
   }
 
-  @Get()
-  findone(id:number) {
+  @Get('/profile')
+  @UseGuards(TokenGuard)
+  findone(@tokendecode() current_user: token_user) {
+    const id = current_user.id;
     return this.userService.finduser(id);
   }
-
 }

@@ -1,35 +1,40 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 @Entity('user')
 export class User {
-  
-    @PrimaryGeneratedColumn()
-    id:string;
+  @PrimaryGeneratedColumn()
+  id: string;
 
-    @Column({
-        unique:true,
-        nullable:false
-    })
-    email:string
-   
-    @Column({
-        nullable:false
-    })
-    password:string
+  @Column({
+    unique: true,
+    nullable: false,
+  })
+  email: string;
 
-    @Column({
-        nullable:false
-    })
-    full_name:string
+  @Column({
+    nullable: false,
+  })
+  password: string;
 
-    @Column({
-        type:'timestamp'
-    })
-    created_at:Date
+  @Column({
+    nullable: false,
+  })
+  full_name: string;
 
-    @Column({
-        type:"timestamp"
-    })
-    updated_at:Date
+  @Column({
+    type: 'timestamp',
+    default: new Date(),
+  })
+  created_at: Date;
 
+  @Column({
+    type: 'timestamp',
+    nullable: true,
+  })
+  updated_at: Date;
+
+  @BeforeInsert()
+  async bycrpyfu() {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
 }
