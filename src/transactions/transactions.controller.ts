@@ -34,9 +34,10 @@ export class TransactionsController {
     @Query('page') page: number,
     @Query('limit') limit: number,
     @Query('category') category: string,
+    @tokendecode() current_user: token_user,
   ) {
     const data = { page, limit, category };
-    return this.transactionsService.findAll(data);
+    return this.transactionsService.findAll(data,current_user);
   }
 
   @Get('summary')

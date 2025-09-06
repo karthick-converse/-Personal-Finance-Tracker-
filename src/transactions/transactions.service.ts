@@ -41,13 +41,14 @@ export class TransactionsService {
     }
   }
 
-  async findAll(data: pagination) {
+  async findAll(data: pagination,current_user:token_user) {
     try {
       const { page, limit, category } = data;
-
+       console.log(current_user);
+       const id=current_user.id
       const offset = (page - 1) * limit;
       const find_data = await this.transactionrepo.find({
-        where: { category: Like('%' + category + '%') },
+        where: { user_id:{id},category: Like('%' + category + '%') },
         skip: offset,
         take: limit,
       });
